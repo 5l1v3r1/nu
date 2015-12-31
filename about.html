@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+		<link rel="stylesheet" href="vendor/jquerymobile/jquery.mobile.min.css" />
+		<link rel="stylesheet" href="vendor/waves/waves.min.css" />
+		<link rel="stylesheet" href="vendor/wow/animate.css" />
+		<link rel="stylesheet" href="css/nativedroid2.css" />
+		<meta name="mobile-web-app-capable" content="yes">
+	 	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<script>window.open = cordova.InAppBrowser.open;</script>
+	</head>
+	<body>
+		<div data-role="page">
+			<div data-role="panel" id="bottomsheet" data-animate="false" data-position='bottom' data-display="overlay">
+				<nd2-include data-src="ext/bottom.sheet.html"></nd2-include>
+			</div>
+			<div data-role="header" data-position="fixed">
+				<a href="#bottomsheet" class="ui-btn ui-btn-right"><i class="zmdi zmdi-more-vert"></i></a>
+				<h1>Nu Kitap Katalog</h1>
+			</div>
+			<div role="main" class="ui-content" data-inset="false">
+				<div class="nd2-card">
+
+					<div class="card-title has-supporting-text">
+						<h3 class="card-primary-title">Nu Kitap Katalog</h3>
+						<h5 class="card-subtitle">Hakkında</h5>
+					</div>
+
+					<div class="card-supporting-text has-action has-title">
+						Android cihazlar için basit ve şık bir kitap katalog uygulaması.
+					</br>
+					</br>
+						Bu Örnek Uygulama <a href="#" onclick="window.open('http://furkankalkan.me', '_system');">M.Furkan Kalkan</a> tarafından BBY261 İleri Programlama dersi için kodlanmış olup GNU GPL v3 lisansına sahiptir.
+					</br>
+					</br>
+						<a href="#" onclick="window.open('https://www.github.com/geekdinazor', '_system');">Github</a>
+					</br>
+					</br>
+					</div>
+
+					<div class="card-action">
+						<div class="row between-xs">
+							<div class="col-xs-12 align-right">
+								<div class="box">
+									<a href="index.html" class="ui-btn ui-btn-inline">Kapat</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
+		<script src="vendor/jquerymobile/jquery.mobile.min.js"></script>
+		<script src="vendor/waves/waves.min.js"></script>
+		<script src="vendor/wow/wow.min.js"></script>
+		<script src="js/nativedroid2.js"></script>
+		<script src="nd2settings.js"></script>
+	</body>
+</html>

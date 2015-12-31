@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+		<link rel="stylesheet" href="vendor/jquerymobile/jquery.mobile.min.css" />
+		<link rel="stylesheet" href="vendor/waves/waves.min.css" />
+		<link rel="stylesheet" href="vendor/wow/animate.css" />
+		<link rel="stylesheet" href="css/nativedroid2.css" />
+		<meta name="mobile-web-app-capable" content="yes">
+	 	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<style>
+			#booksearch{ margin-right: 1em;}
+		</style>
+	</head>
+	<body>
+		<div data-role="page">
+			<div data-role="panel" id="bottomsheet" data-animate="false" data-position='bottom' data-display="overlay">
+				<nd2-include data-src="ext/bottom.sheet.html"></nd2-include>
+			</div>
+			<div data-role="header" data-position="fixed">
+				<a href="#bottomsheet" class="ui-btn ui-btn-right"><i class="zmdi zmdi-more-vert"></i></a>
+				<h1>Nu Kitap Katalog</h1>
+			</div>
+			<div role="main" class="ui-content wow fadeIn" data-inset="false" data-wow-delay="0.2s">
+				<form>
+		    <fieldset data-role="controlgroup" data-type="horizontal">
+		        <legend>Aramak istediğiniz alan: </br></br></legend>
+		        <input name="recordtype" id="title" value="title" checked="checked" type="radio">
+		        <label for="title">Kitap Adı</label>
+		        <input name="recordtype" id="author" value="author" type="radio">
+		        <label for="author">Yazar</label>
+		        <input name="recordtype" id="subject" value="subject" type="radio">
+		        <label for="subject">Konu</label>
+						<input name="recordtype" id="isbn" value="isbn" type="radio">
+		        <label for="isbn">ISBN</label>
+		    </fieldset>
+		</form>
+
+		<input type="text" name="name" id="booksearch" placeholder="Kitap Ara...">
+		<div id="searchResults">
+		</div>
+				<script src="js/jquery.min.js"></script>
+				<script src="js/jquery-ui.min.js"></script>
+				<script src="vendor/jquerymobile/jquery.mobile.min.js"></script>
+				<script src="vendor/waves/waves.min.js"></script>
+				<script src="vendor/wow/wow.min.js"></script>
+				<script src="js/nativedroid2.js"></script>
+				<script src="nd2settings.js"></script>
+				<script type="text/javascript" src="database.js"></script>
+				<script>
+				function binarySearch(r,o){for(var a=0,n=r.length-1,t=Math.floor((n+a)/2);r[t]!=o&&n>a;)o<r[t]?n=t-1:o>r[t]&&(a=t+1),t=Math.floor((n+a)/2);return r[t]!=o?-1:t}
+				function write_details(id){$("#searchResults").html($("#searchResults").html()+'<div class="nd2-card"><div class="card-title has-supporting-text"><h3 class="card-primary-title">'+catalog[id].itemName+'</h3><h5 class="card-subtitle">'+catalog[id].itemAuthor+'</h5></div><div class="card-media"><img src="image/'+catalog[id].itemISBN+'.jpg"></div><div class="card-supporting-text has-action"><b>ISBN:</b> '+catalog[id].itemISBN+'</br><b>Konu:</b> '+catalog[id].itemSubject+'</br><b>Sayfa Sayısı:</b> '+catalog[id].itemNumOfPage+'</br><b>Yayıncı:</b> '+catalog[id].itemCreDate+' '+catalog[id].itemPublisher+'</br></div><div class="card-action"><div class="row between-xs"><div class="col-xs-8 align-left"><div class="box"><a href="#" class="ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button">Ayırt</a></div></div></div></div></div>');}
+				</script>
+				<script type="text/javascript">
+					function searchTitle(searchTerm) {
+						$("#searchResults").html("<h4>Başlık içinde \"" + searchTerm + "\" geçen sonuçlar gösteriliyor:</h4>");
+						for (var i = 0; i < catalog.length; i++) {
+							if (searchTerm == "*") {
+								write_details(i)
+							}
+							else if (catalog[i].itemName.toLowerCase().indexOf(searchTerm.toLowerCase()) != -1){
+								write_details(i)
+							}
+						}
+						if ($("#searchResults").html().indexOf("nd2-card") == -1){
+							alert("Kitap bulunamadı !");
+						}
+					}
+					function searchAuthor(searchTerm) {
+						$("#searchResults").html("<h4>Yazar isminde \"" + searchTerm + "\" geçen sonuçlar gösteriliyor:</h4>");
+						for (var i = 0; i < catalog.length; i++) {
+							if (catalog[i].itemAuthor.toLowerCase().indexOf(searchTerm.toLowerCase()) != -1){
+								write_details(i)
+							}
+						}
+						if ($("#searchResults").html().indexOf("nd2-card") == -1){
+							alert("Kitap bulunamadı !");
+						}
+					}
+					function searchSubject(searchTerm) {
+						$("#searchResults").html("<h4>Konu içinde \"" + searchTerm + "\" geçen sonuçlar gösteriliyor:</h4>");
+						for (var i = 0; i < catalog.length; i++) {
+							if (catalog[i].itemSubject.toLowerCase().indexOf(searchTerm.toLowerCase()) != -1){
+								write_details(i)
+							}
+						}
+						if ($("#searchResults").html().indexOf("nd2-card") == -1){
+							alert("Kitap bulunamadı !");
+						}
+					}
+					function searchISBN(searchTerm) {
+						isbnList = []
+						$("#searchResults").html("<h4>ISBN \"" + searchTerm + "\" :</h4>");
+						for (var i = 0; i < catalog.length; i++) {
+							isbnList.push(catalog[i].itemISBN)
+						}
+						if (binarySearch(isbnList, searchTerm) != -1) {
+							write_details(binarySearch(isbnList, searchTerm));
+						} else {
+							alert("Kitap bulunamadı !");
+						}
+					}
+				</script>
+				<script>
+				$(document).ready(function(){
+				    $("#booksearch").change(function(){
+							var searchTerm = $("#booksearch").val();
+							$("input[name*=recordtype]:checked").each(function() {
+									if ($(this).val() == "title") {
+											$("#booksearch").val("");
+										  searchTitle(searchTerm);
+									}
+									else if ($(this).val() == "author") {
+											$("#booksearch").val("");
+											searchAuthor(searchTerm);
+									}
+									else if ($(this).val() == "subject") {
+											$("#booksearch").val("");
+											searchSubject(searchTerm);
+									}
+									else if ($(this).val() == "isbn") {
+											$("#booksearch").val("");
+											searchISBN(searchTerm);
+									}
+							});
+				    });
+				});
+				</script>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns   = "http://www.w3.org/ns/widgets"
+        xmlns:gap   = "http://phonegap.com/ns/1.0"
+        id          = "me.furkankalkan.nu"
+        versionCode = "10"
+        version     = "1.0.0" >
+
+    <!-- Standart Uygulama Verileri -->
+
+    <name>Nu Kitap Katalog</name>
+
+    <description>
+        Android cihazlar için basit ve şık bir kitap katalog uygulaması.
+    </description>
+
+    <author href="http://furkankalkan.me" email="furkan.kalkan3@gmail.com">
+        Furkan Kalkan
+    </author>
+
+    <!-- Derleme Platformu -->
+
+    <gap:platform name="android" />
+
+    <!-- Ek Özellikler -->
+
+    <preference name="fullscreen" value="false" />
+
+    <!-- İkon -->
+
+    <icon src="icon.png" />
+
+    <!-- Uygulama Hakları -->
+
+    <preference name="permissions" value="none"/>
+    <!-- Plugins -->
+    <plugin name="org.apache.cordova.inappbrowser" spec="0.6.0" source="pgb" />
+
+</widget>
