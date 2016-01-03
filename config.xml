@@ -24,6 +24,9 @@
     <!-- Ek Özellikler -->
 
     <preference name="fullscreen" value="false" />
+    <preference name="orientation" value="portrait" />
+    <gap:splash src="splash.png" />
+    <preference name="splash-screen-duration" value="4000"/>
 
     <!-- İkon -->
 
